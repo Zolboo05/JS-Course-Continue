@@ -5,6 +5,8 @@ var uiController = (function () {
     inputDescription: ".add__description",
     inputValue: ".add__value",
     addBtn: ".add__btn",
+    incomeList: ".income__list",
+    expenseList: ".expenses__title",
   };
 
   return {
@@ -20,15 +22,26 @@ var uiController = (function () {
       return DOMstrings;
     },
 
+    clearFields: function () {
+      var fieldsArr = document.querySelectorAll(
+        DOMstrings.inputValue + ", " + DOMstrings.inputDescription
+      );
+
+      fieldsArr.forEach(function (el, index, array) {
+        el.value = "";
+      });
+      fieldsArr[0].focus();
+    },
+
     addListItem: function (item, type) {
       var html, list;
       // Orlogo zarlagiin elementiig aguulsan HTML-iig beltgene
       if (type === "inc") {
-        list = ".income__list";
+        list = DOMstrings.incomeList;
         html =
           '<div class="item clearfix" id="income-%id%"><div class="item__description">$$DESCRIPTION$$</div><div class="right clearfix"><div class="item__value">+ $$VALUES$$</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
       } else {
-        list = ".expenses__title";
+        list = DOMstrings.expenseList;
         html =
           '<div class="item clearfix" id="expense-%id%"><div class="item__description">$$DESCRIPTION$$</div><div class="right clearfix"><div class="item__value">- $$VALUES$$</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
       }
