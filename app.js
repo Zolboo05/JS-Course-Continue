@@ -23,9 +23,12 @@ var uiController = (function () {
     },
 
     clearFields: function () {
-      var fieldsArr = document.querySelectorAll(
+      var fields = document.querySelectorAll(
         DOMstrings.inputValue + ", " + DOMstrings.inputDescription
       );
+
+      // Convert List to Array
+      var fieldsArr = Array.prototype.slice.call(fields);
 
       fieldsArr.forEach(function (el, index, array) {
         el.value = "";
