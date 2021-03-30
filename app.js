@@ -49,6 +49,20 @@ var uiController = (function () {
       document.querySelector(DOMstrings.dateLabel).textContent =
         today.getFullYear() + " оны " + realMonth + " сарын";
     },
+    changeType: function () {
+      var fields = document.querySelectorAll(
+        DOMstrings.inputType +
+          ", " +
+          DOMstrings.inputDescription +
+          ", " +
+          DOMstrings.inputValue
+      );
+
+      nodeListForeach(fields, function (el) {
+        el.classList.toggle("red-focus");
+      });
+      document.querySelector(DOMstrings.addBtn).classList.toggle("red");
+    },
     getInput: function () {
       return {
         type: document.querySelector(DOMstrings.inputType).value, // exp, inc
@@ -325,7 +339,12 @@ var appController = (function (uiController, financeController) {
         ctrlAddItem();
       }
     });
+    // Дэлгэцэн дээр байгаа оруулах хэсгийг өөрчилнө
+    document
+      .querySelector(DOM.inputType)
+      .addEventListener("change", uiController.changeType);
 
+    // Устгаж байгаа юмнуудыг барьж авна
     document
       .querySelector(DOM.containerDiv)
       .addEventListener("click", function (event) {
